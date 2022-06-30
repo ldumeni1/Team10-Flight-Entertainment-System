@@ -1,16 +1,26 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Badge } from '@mui/material'
-import {Menu, Mail, Notifications, AccountCircle, More, Bluetooth, Restaurant} from '@mui/icons-material'
+import { AppBar, Toolbar, IconButton, Typography, Box, Badge} from '@mui/material'
+import {Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restaurant} from '@mui/icons-material'
+import { borders, flexbox } from '@mui/system';
 import { useState } from 'react';
 
 import FoodMenu from './FoodMenu.js'
 
 function App() {
   const buttonStyles = {color: "red"}
+  const boxStyles = {
+    display: "flex", 
+    justifyContent: "center", 
+    alignItems: "center",
+    minHeight: "80vh"
+  }
 
   const [foodMenu, setFoodMenu] = useState(false);
 
   const handleFoodButton = () => {
-    setFoodMenu(true)
+    if(foodMenu)
+      setFoodMenu(false)
+    else
+      setFoodMenu(true)
   }
 
   return (
@@ -19,29 +29,29 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            style = {buttonStyles}
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <Bluetooth/>
+            <FlightTakeoff/>
           </IconButton>
           
           <Typography
             variant="h6"
             noWrap
             component="div"
+            color="white"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            TEAM10-FLIGHT-ENTERTAINMENT-SYSTEM
           </Typography>
           
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={buttonStyles}>
-              <Badge badgeContent={4} color="error">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge>
                 <Mail />
               </Badge>
             </IconButton>
@@ -50,7 +60,7 @@ function App() {
               color="inherit"
               onClick={handleFoodButton}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge color="error">
                 <Restaurant/>
               </Badge>
             </IconButton>
@@ -78,7 +88,7 @@ function App() {
       </AppBar>
     </Box>
     
-    {foodMenu && <Box>
+    {foodMenu && <Box style={boxStyles}>
       <FoodMenu foodMenu={foodMenu}/>
     </Box>}
   </>

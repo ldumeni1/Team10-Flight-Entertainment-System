@@ -4,23 +4,30 @@ import { borders, flexbox } from '@mui/system';
 import { useState } from 'react';
 
 import FoodMenu from './FoodMenu.js'
+import PhoneMenu from './PhoneMenu.js'
+
+const buttonStyles = {color: "red"}
+
+const boxStyles = {
+    display: "flex", 
+    alignItems: "center",
+    padding: "50px",
+    minHeight: "80vh"
+}
 
 function App() {
-  const buttonStyles = {color: "red"}
-  const boxStyles = {
-    display: "flex", 
-    justifyContent: "center", 
-    alignItems: "center",
-    minHeight: "80vh"
-  }
+  
 
   const [foodMenu, setFoodMenu] = useState(false);
-
   const handleFoodButton = () => {
-    if(foodMenu)
-      setFoodMenu(false)
-    else
-      setFoodMenu(true)
+    setFoodMenu(true);
+    setPhoneMenu(false);
+  }
+
+  const [phoneMenu, setPhoneMenu] = useState(false);
+  const handlePhoneButton = () => {
+    setPhoneMenu(true);
+    setFoodMenu(false);
   }
 
   return (
@@ -58,7 +65,7 @@ function App() {
             <IconButton
               size="large"
               color="inherit"
-              onClick={handleFoodButton}
+              onClick={handlePhoneButton}
             >
               <Badge color="error">
                 <Restaurant/>
@@ -89,7 +96,11 @@ function App() {
     </Box>
     
     {foodMenu && <Box style={boxStyles}>
-      <FoodMenu foodMenu={foodMenu}/>
+      <FoodMenu />
+    </Box>}
+
+    {phoneMenu && <Box style={boxStyles}>
+      <PhoneMenu />
     </Box>}
   </>
   );

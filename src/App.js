@@ -3,8 +3,9 @@ import {Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restauran
 import { borders, flexbox } from '@mui/system';
 import { useState } from 'react';
 
-import FoodMenu from './FoodMenu.js'
-import PhoneMenu from './PhoneMenu.js'
+import FoodMenu from './FoodMenu.js';
+import PhoneMenu from './PhoneMenu.js';
+import EntertainmentMenu from './EntertainmentMenu.js';
 
 const buttonStyles = {color: "red"}
 
@@ -17,12 +18,18 @@ const boxStyles = {
 
 function App() {
   
+const [entertainmentMenu, setEntertainmentMenu] = useState(true);
+  const handleEntertainmentButton = () => {
+    setEntertainmentMenu(true);
+    setFoodMenu(false);
+    setPhoneMenu(false);
+  }
 
   const [foodMenu, setFoodMenu] = useState(false);
   const handleFoodButton = () => {
     setFoodMenu(true);
     setPhoneMenu(false);
-  }
+  }  
 
   const [phoneMenu, setPhoneMenu] = useState(false);
   const handlePhoneButton = () => {
@@ -101,6 +108,10 @@ function App() {
 
     {phoneMenu && <Box style={boxStyles}>
       <PhoneMenu />
+    </Box>}
+
+    {entertainmentMenu && <Box style={{paddingTop:"10px"}}>
+      <EntertainmentMenu />
     </Box>}
   </>
   );

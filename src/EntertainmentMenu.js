@@ -5,6 +5,13 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import Movies from './EntertainmentCatagories/Movies/Movies'
+import TvShows from './EntertainmentCatagories/TvShows/TvShows'
+import Games from './EntertainmentCatagories/Games/Games'
+import Books from './EntertainmentCatagories/Books/Books'
+import AudioBooks from './EntertainmentCatagories/AudioBooks/AudioBooks'
+import SocialMedia from './EntertainmentCatagories/SocialMedia/SocialMedia'
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -54,7 +61,7 @@ function EntertainmentMenu() {
     return (
         <Box>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs" style={{paddingLeft:'125px'}}>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs" style={{paddingLeft:'250px'}}>
                     <Tab label="Movies" {...a11yProps(0)} style={{fontSize:'1.1em', padding:'25px'}} />
                     <Tab label="TV Shows" {...a11yProps(1)} style={{fontSize:'1.1em', padding:'25px'}} />
                     <Tab label="Games" {...a11yProps(2)} style={{fontSize:'1.1em', padding:'25px'}} />
@@ -64,22 +71,22 @@ function EntertainmentMenu() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                Movies
+                <Movies/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                TV Shows
+                <TvShows/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Games
+                <Games/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                Books
+                <Books/>
             </TabPanel>
             <TabPanel value={value} index={4}>
-                Audio Books
+                <AudioBooks/>
             </TabPanel>
             <TabPanel value={value} index={5}>
-                Social Media Apps
+                <SocialMedia/>
             </TabPanel>
         </Box>
     );

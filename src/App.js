@@ -64,45 +64,18 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
           
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge>
-                <Mail />
-              </Badge>
-            </IconButton>
+            
             <IconButton
               size="large"
               color="inherit"
               onClick={handlePhoneButton}
             >
-              <Badge color="error">
                 <Restaurant/>
                 <MovieFilter/>
                 <PhoneIphone/>
                 <RestaurantMenu/>
                 <NotificationsActive/>
                 <Warning/>
-                
-
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <More />
             </IconButton>
           </Box>
         </Toolbar>

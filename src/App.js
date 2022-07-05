@@ -6,6 +6,7 @@ import { useState } from 'react';
 import FoodMenu from './FoodMenu.js';
 import PhoneMenu from './PhoneMenu.js';
 import EntertainmentMenu from './EntertainmentMenu.js';
+import FlightSummaryMenu from './FlightSummaryMenu.js';
 
 const buttonStyles = {color: "red"}
 
@@ -18,23 +19,36 @@ const boxStyles = {
 
 function App() {
   
-const [entertainmentMenu, setEntertainmentMenu] = useState(true);
+  const [entertainmentMenu, setEntertainmentMenu] = useState(true);
   const handleEntertainmentButton = () => {
     setEntertainmentMenu(true);
     setFoodMenu(false);
     setPhoneMenu(false);
+    setFlightSummaryMenu(false);
   }
 
   const [foodMenu, setFoodMenu] = useState(false);
   const handleFoodButton = () => {
     setFoodMenu(true);
     setPhoneMenu(false);
+    setEntertainmentMenu(false);
+    setFlightSummaryMenu(false);
   }  
 
   const [phoneMenu, setPhoneMenu] = useState(false);
   const handlePhoneButton = () => {
     setPhoneMenu(true);
     setFoodMenu(false);
+    setEntertainmentMenu(false);
+    setFlightSummaryMenu(false);
+  }
+
+  const [flightSummaryMenu, setFlightSummaryMenu] = useState(false);
+  const handleFlightSummaryButton = () => {
+    setFlightSummaryMenu(true);
+    setPhoneMenu(false);
+    setFoodMenu(false);
+    setEntertainmentMenu(false);
   }
 
   return (
@@ -48,6 +62,7 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={handleFlightSummaryButton}
           >
             <FlightTakeoff/>
           </IconButton>
@@ -64,7 +79,7 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
           
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton onClick={handleEntertainmentButton} size="large" aria-label="show 4 new mails" color="inherit">
               <Badge>
                 <Mail />
               </Badge>
@@ -72,7 +87,7 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
             <IconButton
               size="large"
               color="inherit"
-              onClick={handlePhoneButton}
+              onClick={handleFoodButton}
             >
               <Badge color="error">
                 <Restaurant/>
@@ -84,6 +99,7 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
               aria-label="account of current user"
               aria-haspopup="true"
               color="inherit"
+              onClick={handlePhoneButton}
             >
               <AccountCircle />
             </IconButton>
@@ -112,6 +128,10 @@ const [entertainmentMenu, setEntertainmentMenu] = useState(true);
 
     {entertainmentMenu && <Box style={{paddingTop:"10px"}}>
       <EntertainmentMenu />
+    </Box>}
+
+    {flightSummaryMenu && <Box style={boxStyles}>
+      <FlightSummaryMenu />
     </Box>}
   </>
   );

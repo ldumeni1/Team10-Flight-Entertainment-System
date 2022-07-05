@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, IconButton, Typography, Box, Badge} from '@mui/material'
-import {Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restaurant} from '@mui/icons-material'
+import {Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restaurant,MovieFilter, PhoneIphone, RestaurantMenu, NotificationsActive, Warning} from '@mui/icons-material'
 import { borders, flexbox } from '@mui/system';
 import { useState } from 'react';
 
@@ -91,6 +91,13 @@ function App() {
             >
               <Badge color="error">
                 <Restaurant/>
+                <MovieFilter/>
+                <PhoneIphone/>
+                <RestaurantMenu/>
+                <NotificationsActive/>
+                <Warning/>
+                
+
               </Badge>
             </IconButton>
             <IconButton

@@ -1,10 +1,10 @@
 import { ConstructionOutlined } from "@mui/icons-material";
-import { Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid} from "@mui/material";
+import { Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid } from "@mui/material";
 import { borders, sizing, flexbox, spacing } from '@mui/system';
 import { useState, useEffect } from 'react';
 
-function FoodMenu(props){
-    const fontStyles = {fontSize: "2em"}
+function FoodMenu(props) {
+    const fontStyles = { fontSize: "2em" }
 
     const [foodDisplay, setFoodDisplay] = useState(true);
     const [drinkDisplay, setDrinkDisplay] = useState(false);
@@ -28,28 +28,21 @@ function FoodMenu(props){
         var hasUpdated = false
 
         const updatedOrderSelection = orderSelection.map((entry) => {
-            console.log("entry name: " + entry.name)
-            console.log("name to match: " + name)
             if (entry.name === name) {
-                console.log("match found")
                 const updatedEntry = {
-                  ...entry,
-                  amount: entry.amount + 1,
+                    ...entry,
+                    amount: entry.amount + 1,
                 };
                 hasUpdated = true;
                 return updatedEntry;
             }
-                return entry;
+            return entry;
         });
-        
-        if(!hasUpdated){
-            console.log("updated")
-            const appendedOrderSelection = orderSelection.concat({name, price, amount});
-            console.log(appendedOrderSelection)
+
+        if (!hasUpdated) {
+            const appendedOrderSelection = orderSelection.concat({ name, price, amount });
             setOrderSelection(appendedOrderSelection)
-        }else{
-            console.log("appended")
-            console.log(updatedOrderSelection)
+        } else {
             setOrderSelection(updatedOrderSelection)
         }
     }
@@ -58,160 +51,120 @@ function FoodMenu(props){
         var total = document.getElementById("total").innerHTML;
         document.getElementById("total").innerHTML = parseFloat(total) - parseFloat(price);
 
-        if(amount > 1){
+        if (amount > 1) {
             const updatedOrderSelection = orderSelection.map((entry) => {
-                console.log("entry name: " + entry.name)
-                console.log("name to match: " + name)
                 if (entry.name === name) {
-                    console.log("match found")
                     const updatedEntry = {
-                    ...entry,
-                    amount: entry.amount - 1,
+                        ...entry,
+                        amount: entry.amount - 1,
                     };
                     return updatedEntry;
                 }
-                    console.log("no match")
-                    console.log(entry)
-                    return entry;
+                return entry;
             });
             setOrderSelection(updatedOrderSelection)
-        }else{
+        } else {
             const removedOrderSelection = orderSelection.filter((entry) => entry.name != name)
             setOrderSelection(removedOrderSelection)
         }
     }
 
-    //useEffect(() => {
-        //localStorage.setItem('orders', JSON.stringify(orderSelection))
-    //}, [orderSelection]);
     const allItems = ["Peanuts", "Pretzels", "Fruit Bowl", "Sandwich", "Soup", "Water", "Soda", "Alcohol", "Sparkling Water"]
     const handleOrderConfirm = () => {
         console.log("confirming...")
         const localStorageOrders = JSON.parse(localStorage.getItem('orders'))
         var condensedLocalStorageOrders = []
-        if(localStorageOrders != null){
+        if (localStorageOrders != null) {
             allItems.forEach(item => {
                 const x = localStorageOrders.filter((entry) => entry.name === item)
                 const y = orderSelection.filter((order) => order.name === item)
-                console.log("x below")
-                console.log(x)
-                console.log("y below")
-                console.log(y)
-                if(x.length !== 0 && y.length !== 0){
-                    console.log("match")
-                    console.log(x[0].name)
-                    console.log(y.name)
-                    console.log(x.price)
-                    console.log(y.price)
-                    console.log(x.amount)
-                    console.log(y.amount)
+                if (x.length !== 0 && y.length !== 0) {
                     const condensedEntry = {
                         name: item,
                         price: x[0].price,
                         amount: x[0].amount + y[0].amount
                     }
                     condensedLocalStorageOrders = condensedLocalStorageOrders.concat(condensedEntry)
-                }else if(x.length !== 0){
+                } else if (x.length !== 0) {
                     condensedLocalStorageOrders = condensedLocalStorageOrders.concat(x)
-                }else if(y.length !== 0){
+                } else if (y.length !== 0) {
                     condensedLocalStorageOrders = condensedLocalStorageOrders.concat(y)
                 }
             })
             localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
-            /*{const condensedLocalStorageOrders = []
-            localStorageOrders.forEach(item  => {
-                orderSelection.forEach(order => {
-                    if (item.name === order.name){
-                        const condensedEntry = {
-                            ...order,
-                            amount: item.amount + order.amount,
-                            //price: (item.amount + order.amount) * order.price
-                        }
-                        return condensedEntry
-                    }else{
-                        return order
-                    }
-                })
-                //localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
-            })
-            localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
-        }else{
-            localStorage.setItem('orders', JSON.stringify(orderSelection))
-        }
-    setOrderSelection([])*/
-        }else{
+        } else {
             localStorage.setItem('orders', JSON.stringify(orderSelection))
         }
         setOrderSelection([])
     }
 
-    return(
-        <Grid 
+    return (
+        <Grid
             container spacing={2}
             direction="row"
             justifyContent="center"
             alignItems="center"
         >
-        <Grid>
-        <h2>Food &amp; Beverage Selection</h2>
-        <Box sx={{ display: 'flex', justifyContent: 'center', border: 2, borderColor: 'primary.main', }}>
-            <List>
-                <ListItem button={true} onClick={handleFoodDisplay}>
-                    <ListItemText 
-                        disableTypography 
-                        primary="Food" 
-                        style={fontStyles}/>
-                </ListItem>
-                <ListItem button={true} onClick={handleDrinkDisplay}>
-                    <ListItemText 
-                        disableTypography 
-                        primary="Drink" 
-                        style={fontStyles}/>
-                </ListItem>
-            </List>
-            {foodDisplay &&
-            <MenuList>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Peanuts: 0.50$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Pretzels: 1.00$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Fruit Bowl: 2.50$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Sandwich: 5:00$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Soup: 3:50$</MenuItem>
-            </MenuList>}
-            {drinkDisplay &&
-            <MenuList>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Water: 0.00$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Soda: 2.00$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Alcohol: 6:00$</MenuItem>
-                <MenuItem style={fontStyles} onClick={addToOrder}>Sparkling Water: 1:00$</MenuItem>
-            </MenuList>}
-        </Box>
-        </Grid>
-        <Grid 
-            container spacing={0}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-        >
-        <Grid  item style={{ flexGrow: "1" }}>
-            <h2 text-align="center">Cart Items</h2>
-            <Box sx={{ display: 'flex', justifyContent: 'center', width: 300, border: 2, borderColor: 'primary.main'}}>
-                {orderSelection.length != 0 ? 
-                <ul>
-                {orderSelection.map((item) => (
-                <li key={item.price}>{item.name} {item.amount} 
-                    <span><button onClick={() => removeFromOrder(item.name, item.price, item.amount)}> remove </button></span>
-                </li>
-                ))}
-                </ul> : <p>Cart is Empty</p>}  
-            </Box>
-        </Grid>
-            <Box sx={{border: 2, borderColor: 'primary.main'}}>
-                <Typography style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
-            </Box>
-        <Grid>
-            <button onClick={handleOrderConfirm}> Confirm Order </button>
-        </Grid>
-        </Grid>
+            <Grid>
+                <h2>Food &amp; Beverage Selection</h2>
+                <Box sx={{ display: 'flex', justifyContent: 'center', border: 2, borderColor: 'primary.main', }}>
+                    <List>
+                        <ListItem button={true} onClick={handleFoodDisplay}>
+                            <ListItemText
+                                disableTypography
+                                primary="Food"
+                                style={fontStyles} />
+                        </ListItem>
+                        <ListItem button={true} onClick={handleDrinkDisplay}>
+                            <ListItemText
+                                disableTypography
+                                primary="Drink"
+                                style={fontStyles} />
+                        </ListItem>
+                    </List>
+                    {foodDisplay &&
+                        <MenuList>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Peanuts: 0.50$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Pretzels: 1.00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Fruit Bowl: 2.50$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Sandwich: 5:00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Soup: 3:50$</MenuItem>
+                        </MenuList>}
+                    {drinkDisplay &&
+                        <MenuList>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Water: 0.00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Soda: 2.00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Alcohol: 6:00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Sparkling Water: 1:00$</MenuItem>
+                        </MenuList>}
+                </Box>
+            </Grid>
+            <Grid
+                container spacing={0}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Grid item style={{ flexGrow: "1" }}>
+                    <h2 text-align="center">Cart Items</h2>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: 300, border: 2, borderColor: 'primary.main' }}>
+                        {orderSelection.length != 0 ?
+                            <ul>
+                                {orderSelection.map((item) => (
+                                    <li key={item.price}>{item.name} {item.amount}
+                                        <span><button onClick={() => removeFromOrder(item.name, item.price, item.amount)}> remove </button></span>
+                                    </li>
+                                ))}
+                            </ul> : <p>Cart is Empty</p>}
+                    </Box>
+                </Grid>
+                <Box sx={{ border: 2, borderColor: 'primary.main' }}>
+                    <Typography style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
+                </Box>
+                <Grid>
+                    <button onClick={handleOrderConfirm}> Confirm Order </button>
+                </Grid>
+            </Grid>
         </Grid>
     );
 }

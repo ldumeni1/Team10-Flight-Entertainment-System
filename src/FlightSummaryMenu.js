@@ -51,7 +51,7 @@ function FlightSummaryMenu() {
             <Grid container
                 direction="column"
             >
-                <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "50px", width: 300 }}>
+                <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                     <Paper style={{ padding: "10px" }}>
                         <FormControl>
                             <FormLabel id="call-payment">Form of Payment</FormLabel>
@@ -65,7 +65,7 @@ function FlightSummaryMenu() {
                         </FormControl>
                     </Paper>
                 </Grid>
-                <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "50px", width: 300 }}>
+                <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                     <Paper style={{ padding: "10px" }}>
                         <FormControl>
                             <FormLabel id="receipt-type">Receipt Type</FormLabel>
@@ -77,10 +77,21 @@ function FlightSummaryMenu() {
                                 <FormControlLabel onChange={handleTextSelected} value="sms" control={<Radio />} label="Text" />
                             </RadioGroup>
                         </FormControl>
+                        <FormControl>
+                            <FormLabel id="receipt-type">Would you like a second receipt?</FormLabel>
+                            <RadioGroup
+                                defaultValue="email"
+                                name="payment-method"
+                            >
+                                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                                <FormControlLabel value="No" control={<Radio />} label="No" />
+                            </RadioGroup>
+                        </FormControl>
                     </Paper>
                 </Grid>
+                
                 {textSelected ? (
-                    <Grid item style={{ paddingTop: "20px", paddingLeft: "75px", width: 300 }} xs={4}>
+                    <Grid item style={{ paddingLeft: "75px", width: 300 }} xs={2}>
                         <Paper style={{ padding: "10px" }}>
                             <TextField
                                 required

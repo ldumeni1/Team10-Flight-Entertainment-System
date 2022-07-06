@@ -63,7 +63,7 @@ function App() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: '#EEBC1D' }}>
           <Toolbar>
             <img src={UMBCLogo} height={'45px'} width={"35px"} style={{ paddingRight: '20px' }} />
 
@@ -71,7 +71,7 @@ function App() {
               variant="h6"
               noWrap
               component="div"
-              color="white"
+              color="black"
               sx={{ display: { xs: 'none', sm: 'block' } }}
             >
               TEAM10-FLIGHT-ENTERTAINMENT-SYSTEM
@@ -82,42 +82,42 @@ function App() {
 
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handleFoodButton}
               >
                 <Restaurant />
               </IconButton>
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handleEntertainmentButton}
               >
                 <MovieFilter />
               </IconButton>
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handlePhoneButton}
               >
                 <PhoneIphone />
               </IconButton>
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handleFlightSummaryButton}
               >
                 <FlightTakeoff />
               </IconButton>
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handleAttendantButton}
               >
                 <NotificationsActive />
               </IconButton>
               <IconButton
                 size="large"
-                color="inherit"
+                backgroundcolor="black"
                 onClick={handleEmergencyButton}
               >
                 <Warning />

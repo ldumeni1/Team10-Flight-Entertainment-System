@@ -87,7 +87,6 @@ function FlightSummaryMenu() {
                                 id="phonenumber"
                                 label="Phone Number"
                                 variant="standard"
-                                value="Enter number here"
                             />
                         </Paper>
                     </Grid>) : (

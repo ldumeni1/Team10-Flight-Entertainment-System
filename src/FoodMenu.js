@@ -1,3 +1,4 @@
+import { ConstructionOutlined } from "@mui/icons-material";
 import { Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid} from "@mui/material";
 import { borders, sizing, flexbox, spacing } from '@mui/system';
 import { useState, useEffect } from 'react';
@@ -83,11 +84,64 @@ function FoodMenu(props){
     //useEffect(() => {
         //localStorage.setItem('orders', JSON.stringify(orderSelection))
     //}, [orderSelection]);
-
+    const allItems = ["Peanuts", "Pretzels", "Fruit Bowl", "Sandwich", "Soup", "Water", "Soda", "Alcohol", "Sparkling Water"]
     const handleOrderConfirm = () => {
-        const storedOrders = JSON.parse(localStorage.getItem('orders'))
-        const updatedStoredOrders = storedOrders.concat(orderSelection)
-        localStorage.setItem('orders', JSON.stringify(updatedStoredOrders))
+        console.log("confirming...")
+        const localStorageOrders = JSON.parse(localStorage.getItem('orders'))
+        var condensedLocalStorageOrders = []
+        if(localStorageOrders != null){
+            allItems.forEach(item => {
+                const x = localStorageOrders.filter((entry) => entry.name === item)
+                const y = orderSelection.filter((order) => order.name === item)
+                console.log("x below")
+                console.log(x)
+                console.log("y below")
+                console.log(y)
+                if(x.length !== 0 && y.length !== 0){
+                    console.log("match")
+                    console.log(x[0].name)
+                    console.log(y.name)
+                    console.log(x.price)
+                    console.log(y.price)
+                    console.log(x.amount)
+                    console.log(y.amount)
+                    const condensedEntry = {
+                        name: item,
+                        price: x[0].price,
+                        amount: x[0].amount + y[0].amount
+                    }
+                    condensedLocalStorageOrders = condensedLocalStorageOrders.concat(condensedEntry)
+                }else if(x.length !== 0){
+                    condensedLocalStorageOrders = condensedLocalStorageOrders.concat(x)
+                }else if(y.length !== 0){
+                    condensedLocalStorageOrders = condensedLocalStorageOrders.concat(y)
+                }
+            })
+            localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
+            /*{const condensedLocalStorageOrders = []
+            localStorageOrders.forEach(item  => {
+                orderSelection.forEach(order => {
+                    if (item.name === order.name){
+                        const condensedEntry = {
+                            ...order,
+                            amount: item.amount + order.amount,
+                            //price: (item.amount + order.amount) * order.price
+                        }
+                        return condensedEntry
+                    }else{
+                        return order
+                    }
+                })
+                //localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
+            })
+            localStorage.setItem('orders', JSON.stringify(condensedLocalStorageOrders))
+        }else{
+            localStorage.setItem('orders', JSON.stringify(orderSelection))
+        }
+    setOrderSelection([])*/
+        }else{
+            localStorage.setItem('orders', JSON.stringify(orderSelection))
+        }
         setOrderSelection([])
     }
 

@@ -63,7 +63,7 @@ function App() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: '#EEBC1D' }}>
           <Toolbar>
             <img src={UMBCLogo} height={'45px'} width={"35px"} style={{ paddingRight: '20px' }} />
 

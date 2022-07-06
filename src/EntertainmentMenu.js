@@ -65,8 +65,8 @@ function EntertainmentMenu() {
                     <Tab label="Movies" {...a11yProps(0)} style={{fontSize:'1.1em', padding:'25px'}} />
                     <Tab label="TV Shows" {...a11yProps(1)} style={{fontSize:'1.1em', padding:'25px'}} />
                     <Tab label="Games" {...a11yProps(2)} style={{fontSize:'1.1em', padding:'25px'}} />
-                    <Tab label="Book" {...a11yProps(3)} style={{fontSize:'1.1em', padding:'25px'}} />
-                    <Tab label="Audio Book" {...a11yProps(4)} style={{fontSize:'1.1em', padding:'25px'}} />
+                    <Tab label="Books" {...a11yProps(3)} style={{fontSize:'1.1em', padding:'25px'}} />
+                    <Tab label="Audio Books" {...a11yProps(4)} style={{fontSize:'1.1em', padding:'25px'}} />
                     <Tab label="Social Media" {...a11yProps(5)} style={{fontSize:'1.1em', padding:'25px'}} />
                 </Tabs>
             </Box>

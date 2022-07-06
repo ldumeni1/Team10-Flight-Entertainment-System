@@ -48,7 +48,7 @@ function PhoneMenu() {
                             name="payment-method"
                         >
                             <FormControlLabel value="credit" control={<Radio />} label="Credit Card" />
-                            <FormControlLabel value="points" control={<Radio />} label="Rewards Poins" />
+                            <FormControlLabel value="points" control={<Radio />} label="Rewards Points" />
                         </RadioGroup>
                     </FormControl>
                 </Paper>

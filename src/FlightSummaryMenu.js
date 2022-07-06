@@ -95,11 +95,11 @@ function FlightSummaryMenu() {
                     <h2>Orders Below</h2>
                     <Paper style={{ display: "flex", maxHeight: '400px', overflow: 'auto' }}>
                         <List>
-                            {orders.map((item) => (
+                            {JSON.parse(localStorage.getItem('orders')) != null ? orders.map((item) => (
                                 <ListItem key={item.price}>
-                                    <ListItemText>x{item.amount} {item.name} {item.price}</ListItemText>
+                                    <ListItemText>x{item.amount} {item.name} {parseFloat(item.price) * item.amount}$</ListItemText>
                                 </ListItem>
-                            ))}
+                            )): <Typography>No Orders Submitted</Typography>}
                         </List>
                     </Paper>
                 </Grid>

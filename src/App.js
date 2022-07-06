@@ -1,5 +1,5 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Badge} from '@mui/material'
-import {Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restaurant,MovieFilter, PhoneIphone, RestaurantMenu, NotificationsActive, Warning} from '@mui/icons-material'
+import { AppBar, Toolbar, IconButton, Typography, Box, Badge } from '@mui/material'
+import { Menu, Mail, Notifications, AccountCircle, More, FlightTakeoff, Restaurant, MovieFilter, PhoneIphone, RestaurantMenu, NotificationsActive, Warning } from '@mui/icons-material'
 import { borders, flexbox } from '@mui/system';
 import { useState } from 'react';
 
@@ -8,17 +8,17 @@ import PhoneMenu from './PhoneMenu.js';
 import EntertainmentMenu from './EntertainmentMenu.js';
 import FlightSummaryMenu from './FlightSummaryMenu.js';
 
-const buttonStyles = {color: "red"}
+const buttonStyles = { color: "red" }
 
 const boxStyles = {
-    display: "flex", 
-    alignItems: "center",
-    padding: "50px",
-    minHeight: "80vh"
+  display: "flex",
+  alignItems: "center",
+  padding: "50px",
+  minHeight: "80vh"
 }
 
 function App() {
-  
+
   const [entertainmentMenu, setEntertainmentMenu] = useState(true);
   const handleEntertainmentButton = () => {
     setEntertainmentMenu(true);
@@ -33,7 +33,7 @@ function App() {
     setPhoneMenu(false);
     setEntertainmentMenu(false);
     setFlightSummaryMenu(false);
-  }  
+  }
 
   const [phoneMenu, setPhoneMenu] = useState(false);
   const handlePhoneButton = () => {
@@ -51,68 +51,99 @@ function App() {
     setEntertainmentMenu(false);
   }
 
+  const handleEmergencyButton = () => {
+    confirm('WARNING! - This function is for emergencies only! If you need normal assistance, use the flight attendant button.');
+  }
+
+  const handleAttendantButton = () => {
+    alert('Flight Attendant Assistance Requested');
+  }
+
   return (
-  <>
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={handleFlightSummaryButton}
-          >
-            <FlightTakeoff/>
-          </IconButton>
-          
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            color="white"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            TEAM10-FLIGHT-ENTERTAINMENT-SYSTEM
-          </Typography>
-          
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
             <IconButton
               size="large"
+              edge="start"
               color="inherit"
-              onClick={handleFoodButton}
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+              onClick={handleFlightSummaryButton}
             >
-                <Restaurant/>
-                <MovieFilter/>
-                <PhoneIphone/>
-                <RestaurantMenu/>
-                <NotificationsActive/>
-                <Warning/>
+              <FlightTakeoff />
             </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
-    
-    {foodMenu && <Box style={boxStyles}>
-      <FoodMenu />
-    </Box>}
 
-    {phoneMenu && <Box style={boxStyles}>
-      <PhoneMenu />
-    </Box>}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              color="white"
+              sx={{ display: { xs: 'none', sm: 'block' } }}
+            >
+              TEAM10-FLIGHT-ENTERTAINMENT-SYSTEM
+            </Typography>
 
-    {entertainmentMenu && <Box style={{paddingTop:"10px"}}>
-      <EntertainmentMenu />
-    </Box>}
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-    {flightSummaryMenu && <Box style={boxStyles}>
-      <FlightSummaryMenu />
-    </Box>}
-  </>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handleFoodButton}
+              >
+                <Restaurant />
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handleEntertainmentButton}
+              >
+                <MovieFilter />
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handlePhoneButton}
+              >
+                <PhoneIphone />
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handleAttendantButton}
+              >
+                <NotificationsActive />
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handleEmergencyButton}
+              >
+                <Warning />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+      {foodMenu && <Box style={boxStyles}>
+        <FoodMenu />
+      </Box>}
+
+      {phoneMenu && <Box style={boxStyles}>
+        <PhoneMenu />
+      </Box>}
+
+      {entertainmentMenu && <Box style={{ paddingTop: "10px" }}>
+        <EntertainmentMenu />
+      </Box>}
+
+      {flightSummaryMenu && <Box style={boxStyles}>
+        <FlightSummaryMenu />
+      </Box>}
+    </>
   );
 }
 

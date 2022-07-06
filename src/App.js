@@ -7,6 +7,7 @@ import FoodMenu from './FoodMenu.js';
 import PhoneMenu from './PhoneMenu.js';
 import EntertainmentMenu from './EntertainmentMenu.js';
 import FlightSummaryMenu from './FlightSummaryMenu.js';
+import UMBCLogo from './UMBC-vertical-logo-RGB.png'
 
 const buttonStyles = { color: "red" }
 
@@ -64,16 +65,7 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-              onClick={handleFlightSummaryButton}
-            >
-              <FlightTakeoff />
-            </IconButton>
+            <img src={UMBCLogo} height={'45px'} width={"35px"} style={{ paddingRight: '20px' }} />
 
             <Typography
               variant="h6"
@@ -108,6 +100,13 @@ function App() {
                 onClick={handlePhoneButton}
               >
                 <PhoneIphone />
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={handleFlightSummaryButton}
+              >
+                <FlightTakeoff />
               </IconButton>
               <IconButton
                 size="large"

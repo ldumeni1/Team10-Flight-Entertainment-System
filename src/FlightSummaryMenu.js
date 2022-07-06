@@ -34,6 +34,16 @@ function FlightSummaryMenu() {
 
     var orders = JSON.parse(localStorage.getItem('orders'))
 
+    useEffect(() => {
+        var total = 0
+        if(JSON.parse(localStorage.getItem('orders')) != null)
+            orders.map((item) => (
+                total = total + (parseFloat(item.price) * item.amount)
+            )
+        )
+        document.getElementById('bill').innerHTML = total
+      }, []);
+
     return (
         <Grid container
             direction="row"
@@ -80,7 +90,7 @@ function FlightSummaryMenu() {
                                 value="Enter number here"
                             />
                         </Paper>
-                    </Grid> ):(
+                    </Grid>) : (
                     <Grid item style={{ paddingTop: "20px", paddingLeft: "75px", width: 300 }} xs={4}>
                         <Paper style={{ padding: "10px" }}>
                             <TextField
@@ -99,14 +109,11 @@ function FlightSummaryMenu() {
                                 <ListItem key={item.price}>
                                     <ListItemText>x{item.amount} {item.name} {parseFloat(item.price) * item.amount}$</ListItemText>
                                 </ListItem>
-                            )): <Typography>No Orders Submitted</Typography>}
+                            )) : <Typography>No Orders Submitted</Typography>}
                         </List>
                     </Paper>
+                    <h2>Your Total Is: <span id='bill'>0.00</span>$</h2>
                 </Grid>
-            </Grid>
-            <Grid container
-                direction="row"
-            >
             </Grid>
         </Grid>
     );

@@ -178,8 +178,8 @@ function FoodMenu(props) {
             </Grid>
 
             {/* Form of payment form radio display */}
-            <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
-                <Paper style={{ padding: "10px" }}>
+            <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", paddingRight:'25px', width: 300 }}>
+                <Paper style={{ padding: "10px", width: 170 }}>
                     <FormControl>
                         <FormLabel id="call-payment">Form of Payment</FormLabel>
                         <RadioGroup
@@ -187,7 +187,7 @@ function FoodMenu(props) {
                             name="payment-method"
                         >
                             <FormControlLabel value="credit" control={<Radio />} label="Credit Card" />
-                            <FormControlLabel value="points" control={<Radio />} label="Rewards Poins" />
+                            <FormControlLabel value="points" control={<Radio />} label="Rewards Points" />
                         </RadioGroup>
                     </FormControl>
                     <TextField
@@ -202,7 +202,7 @@ function FoodMenu(props) {
 
             {/* Receipt type form radio display */}
             <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
-                <Paper style={{ padding: "10px" }}>
+                <Paper style={{ padding: "10px", width: 250 }}>
                     <FormControl>
                         <FormLabel id="receipt-type">Receipt Type</FormLabel>
                         <RadioGroup
@@ -216,7 +216,7 @@ function FoodMenu(props) {
                     <FormControl>
                         <FormLabel id="receipt-type">Would you like a second receipt?</FormLabel>
                         <RadioGroup
-                            defaultValue="email"
+                            defaultValue="yes"
                             name="payment-method"
                         >
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />

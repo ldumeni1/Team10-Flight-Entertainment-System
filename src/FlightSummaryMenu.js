@@ -1,19 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { borders, sizing, flexbox, spacing } from '@mui/system';
-import {
-    Grid,
-    Paper,
-    Radio,
-    RadioGroup,
-    FormControlLabel,
-    FormControl,
-    FormLabel,
-    TextField,
-    Button,
-    Typography,
-    List,
-    ListItem,
-    ListItemText
+import { Grid,Paper, Radio, RadioGroup, FormControlLabel,
+    FormControl, FormLabel, TextField, Button, Typography,
+    List, ListItem, ListItemText
 } from "@mui/material";
 
 //start of function tag that displays for <FlightSummaryMenu/> in App.js

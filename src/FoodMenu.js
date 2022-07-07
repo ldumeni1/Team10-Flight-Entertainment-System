@@ -91,7 +91,6 @@ function FoodMenu(props) {
 
     const allItems = ["Peanuts", "Pretzels", "Fruit Bowl", "Sandwich", "Soup", "Water", "Soda", "Alcohol", "Sparkling Water"]
     const handleOrderConfirm = () => {
-        console.log("confirming...")
         const localStorageOrders = JSON.parse(localStorage.getItem('orders'))
         var condensedLocalStorageOrders = []
         if (localStorageOrders != null) {

@@ -36,13 +36,13 @@ function FlightSummaryMenu() {
 
     useEffect(() => {
         var total = 0
-        if(JSON.parse(localStorage.getItem('orders')) != null)
+        if (JSON.parse(localStorage.getItem('orders')) != null)
             orders.map((item) => (
                 total = total + (parseFloat(item.price) * item.amount)
             )
-        )
+            )
         document.getElementById('bill').innerHTML = total
-      }, []);
+    }, []);
 
     return (
         <Grid container
@@ -89,7 +89,7 @@ function FlightSummaryMenu() {
                         </FormControl>
                     </Paper>
                 </Grid>
-                
+
                 {textSelected ? (
                     <Grid item style={{ paddingLeft: "75px", width: 300 }} xs={2}>
                         <Paper style={{ padding: "10px" }}>

@@ -12,7 +12,7 @@ function FoodMenu(props) {
     //styles obj for fonts
     const fontStyles = { fontSize: "2em" }
 
-    //React state hooks
+    //React state variables & state hooks
     const [foodDisplay, setFoodDisplay] = useState(true);
     const [drinkDisplay, setDrinkDisplay] = useState(false);
     const [orderSelection, setOrderSelection] = useState([]);

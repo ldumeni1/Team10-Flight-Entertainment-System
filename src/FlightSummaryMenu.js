@@ -8,7 +8,7 @@ import { Grid,Paper, Radio, RadioGroup, FormControlLabel,
 //start of function tag that displays for <FlightSummaryMenu/> in App.js
 function FlightSummaryMenu() {
 
-    //React state hooks
+    //React state variables & state hooks
     const [submittedOrders, setSubmittedOrders] = useState(JSON.parse(localStorage.getItem('orders')))
     const [textSelected, setTextSelected] = useState(false);
     const [emailSelected, setEmailSelected] = useState(true);

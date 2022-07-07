@@ -1,5 +1,12 @@
 import { ConstructionOutlined } from "@mui/icons-material";
-import { Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid } from "@mui/material";
+import {
+    Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid, Paper, Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl,
+    FormLabel,
+    TextField
+} from "@mui/material";
 import { borders, sizing, flexbox, spacing } from '@mui/system';
 import { useState, useEffect } from 'react';
 
@@ -9,6 +16,19 @@ function FoodMenu(props) {
     const [foodDisplay, setFoodDisplay] = useState(true);
     const [drinkDisplay, setDrinkDisplay] = useState(false);
     const [orderSelection, setOrderSelection] = useState([]);
+
+    const [textSelected, setTextSelected] = useState(false);
+    const [emailSelected, setEmailSelected] = useState(true);
+
+    const handleTextSelected = (event) => {
+        setTextSelected(true)
+        setEmailSelected(false)
+    }
+
+    const handleEmailSelected = (event) => {
+        setTextSelected(false)
+        setEmailSelected(true)
+    }
 
     const handleFoodDisplay = () => {
         setFoodDisplay(true)
@@ -139,6 +159,53 @@ function FoodMenu(props) {
                         </MenuList>}
                 </Box>
             </Grid>
+
+            <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
+                <Paper style={{ padding: "10px" }}>
+                    <FormControl>
+                        <FormLabel id="call-payment">Form of Payment</FormLabel>
+                        <RadioGroup
+                            defaultValue="credit"
+                            name="payment-method"
+                        >
+                            <FormControlLabel value="credit" control={<Radio />} label="Credit Card" />
+                            <FormControlLabel value="points" control={<Radio />} label="Rewards Poins" />
+                        </RadioGroup>
+                    </FormControl>
+                    <TextField
+                        required
+                        id="credentials"
+                        label="Credentials"
+                        defaultValue="Enter Information Here"
+                        variant="standard"
+                    />
+                </Paper>
+            </Grid>
+            <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
+                <Paper style={{ padding: "10px" }}>
+                    <FormControl>
+                        <FormLabel id="receipt-type">Receipt Type</FormLabel>
+                        <RadioGroup
+                            defaultValue="email"
+                            name="payment-method"
+                        >
+                            <FormControlLabel onChange={handleEmailSelected} value="email" control={<Radio />} label="Email" />
+                            <FormControlLabel onChange={handleTextSelected} value="sms" control={<Radio />} label="Text" />
+                        </RadioGroup>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel id="receipt-type">Would you like a second receipt?</FormLabel>
+                        <RadioGroup
+                            defaultValue="email"
+                            name="payment-method"
+                        >
+                            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="No" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </FormControl>
+                </Paper>
+            </Grid>
+
             <Grid
                 container spacing={0}
                 direction="column"
@@ -158,7 +225,7 @@ function FoodMenu(props) {
                             </ul> : <p>Cart is Empty</p>}
                     </Box>
                 </Grid>
-                <Box sx={{ border: 2, borderColor: 'primary.main' }}>
+                <Box>
                     <Typography style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
                 </Box>
                 <Grid>

@@ -1,18 +1,18 @@
 import { ConstructionOutlined } from "@mui/icons-material";
 import {
-    Box, List, ListItem, ListItemText, Typography, Menu, MenuList, MenuItem, Grid, Paper, Radio,
-    RadioGroup,
-    FormControlLabel,
-    FormControl,
-    FormLabel,
-    TextField
+    Box, List, ListItem, ListItemText, Typography, Menu, MenuList,
+    MenuItem, Grid, Paper, Radio, RadioGroup, FormControlLabel,
+    FormControl, FormLabel, TextField
 } from "@mui/material";
 import { borders, sizing, flexbox, spacing } from '@mui/system';
 import { useState, useEffect } from 'react';
 
+//start of function tag that displays for <FoodMenu/> in App.js
 function FoodMenu(props) {
+    //styles obj for fonts
     const fontStyles = { fontSize: "2em" }
 
+    //React state hooks
     const [foodDisplay, setFoodDisplay] = useState(true);
     const [drinkDisplay, setDrinkDisplay] = useState(false);
     const [orderSelection, setOrderSelection] = useState([]);
@@ -20,6 +20,7 @@ function FoodMenu(props) {
     const [textSelected, setTextSelected] = useState(false);
     const [emailSelected, setEmailSelected] = useState(true);
 
+    ///event handlers for radio buttons and forms control of email vs sms selections
     const handleTextSelected = (event) => {
         setTextSelected(true)
         setEmailSelected(false)
@@ -30,15 +31,19 @@ function FoodMenu(props) {
         setEmailSelected(true)
     }
 
+    //handler events for food or drink display on menu
     const handleFoodDisplay = () => {
         setFoodDisplay(true)
         setDrinkDisplay(false)
     }
+
     const handleDrinkDisplay = () => {
         setDrinkDisplay(true)
         setFoodDisplay(false)
     }
-    const addToOrder = (event) => {
+
+    //add to order functiuon upon order confirmation button
+    const addToOrder = (event) => { //argument current event
         var arr = event.currentTarget.innerText.split(": ");
         var name = arr[0];
         var amount = 1
@@ -47,6 +52,7 @@ function FoodMenu(props) {
         document.getElementById("total").innerHTML = parseFloat(total) + parseFloat(price);
         var hasUpdated = false
 
+        //function to map new orders and update
         const updatedOrderSelection = orderSelection.map((entry) => {
             if (entry.name === name) {
                 const updatedEntry = {
@@ -59,19 +65,20 @@ function FoodMenu(props) {
             return entry;
         });
 
-        if (!hasUpdated) {
+        if (!hasUpdated) { //if there was an update, concatonate
             const appendedOrderSelection = orderSelection.concat({ name, price, amount });
             setOrderSelection(appendedOrderSelection)
-        } else {
+        } else { //otherwise this was a new item not in the list before
             setOrderSelection(updatedOrderSelection)
         }
     }
 
+    //remove function from current 
     const removeFromOrder = (name, price, amount) => {
         var total = document.getElementById("total").innerHTML;
         document.getElementById("total").innerHTML = parseFloat(total) - parseFloat(price);
 
-        if (amount > 1) {
+        if (amount > 1) { //if removing would not result in zero items
             const updatedOrderSelection = orderSelection.map((entry) => {
                 if (entry.name === name) {
                     const updatedEntry = {
@@ -83,17 +90,24 @@ function FoodMenu(props) {
                 return entry;
             });
             setOrderSelection(updatedOrderSelection)
-        } else {
+        } else { //else filter the item from the list
             const removedOrderSelection = orderSelection.filter((entry) => entry.name != name)
             setOrderSelection(removedOrderSelection)
         }
     }
 
+    //all possible orders
     const allItems = ["Peanuts", "Pretzels", "Fruit Bowl", "Sandwich", "Soup", "Water", "Soda", "Alcohol", "Sparkling Water"]
+
+    //on button for order submit
     const handleOrderConfirm = () => {
         const localStorageOrders = JSON.parse(localStorage.getItem('orders'))
+        //container for local storage + current order
         var condensedLocalStorageOrders = []
+        //if this is not the first pass to local storage
         if (localStorageOrders != null) {
+            //loop through allItems, check local storage and the order array
+            //for that same item, condense them
             allItems.forEach(item => {
                 const x = localStorageOrders.filter((entry) => entry.name === item)
                 const y = orderSelection.filter((order) => order.name === item)
@@ -114,17 +128,19 @@ function FoodMenu(props) {
         } else {
             localStorage.setItem('orders', JSON.stringify(orderSelection))
         }
-        setOrderSelection([])
+        setOrderSelection([]) //clear the current cart
     }
 
+    //the return render
     return (
-        <Grid
+        <Grid //row display container
             container spacing={2}
             direction="row"
             justifyContent="center"
             alignItems="center"
         >
             <Grid>
+                {/* food and beverage displays */}
                 <h2>Food &amp; Beverage Selection</h2>
                 <Box sx={{ display: 'flex', justifyContent: 'center', border: 2, borderColor: 'primary.main', }}>
                     <List>
@@ -159,6 +175,7 @@ function FoodMenu(props) {
                 </Box>
             </Grid>
 
+            {/* Form of payment form radio display */}
             <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                 <Paper style={{ padding: "10px" }}>
                     <FormControl>
@@ -180,6 +197,8 @@ function FoodMenu(props) {
                     />
                 </Paper>
             </Grid>
+
+            {/* Receipt type form radio display */}
             <Grid item xs={2} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                 <Paper style={{ padding: "10px" }}>
                     <FormControl>
@@ -205,12 +224,13 @@ function FoodMenu(props) {
                 </Paper>
             </Grid>
 
-            <Grid
+            <Grid //column display container
                 container spacing={0}
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
             >
+                {/* conditional cart render */}
                 <Grid item style={{ flexGrow: "1" }}>
                     <h2 text-align="center">Cart Items</h2>
                     <Box sx={{ display: 'flex', justifyContent: 'center', width: 300, border: 2, borderColor: 'primary.main' }}>
@@ -227,6 +247,7 @@ function FoodMenu(props) {
                 <Box>
                     <Typography style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
                 </Box>
+                {/* confirm button to fire cascading events */}
                 <Grid>
                     <button onClick={handleOrderConfirm}> Confirm Order </button>
                 </Grid>

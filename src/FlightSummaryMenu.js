@@ -16,12 +16,15 @@ import {
     ListItemText
 } from "@mui/material";
 
+//start of function tag that displays for <FlightSummaryMenu/> in App.js
 function FlightSummaryMenu() {
 
+    //React state hooks
     const [submittedOrders, setSubmittedOrders] = useState(JSON.parse(localStorage.getItem('orders')))
     const [textSelected, setTextSelected] = useState(false);
     const [emailSelected, setEmailSelected] = useState(true);
 
+    //event handlers for radio buttons and forms control of email vs sms selections
     const handleTextSelected = (event) => {
         setTextSelected(true)
         setEmailSelected(false)
@@ -32,8 +35,10 @@ function FlightSummaryMenu() {
         setEmailSelected(true)
     }
 
+    //retrieving orders stored in local storage
     var orders = JSON.parse(localStorage.getItem('orders'))
 
+    //useEffect that on page render generates the total bill
     useEffect(() => {
         var total = 0
         if (JSON.parse(localStorage.getItem('orders')) != null)
@@ -44,13 +49,15 @@ function FlightSummaryMenu() {
         document.getElementById('bill').innerHTML = total
     }, []);
 
+    //the return render
     return (
-        <Grid container
+        <Grid container //row display container
             direction="row"
         >
-            <Grid container
+            <Grid container //with first row a column container
                 direction="column"
             >
+                {/* Form of payment form radio display */}
                 <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                     <Paper style={{ padding: "10px" }}>
                         <FormControl>
@@ -65,6 +72,8 @@ function FlightSummaryMenu() {
                         </FormControl>
                     </Paper>
                 </Grid>
+
+                {/* Receipt type form radio display */}
                 <Grid item xs={1} style={{ paddingLeft: "75px", paddingBottom: "25px", width: 300 }}>
                     <Paper style={{ padding: "10px" }}>
                         <FormControl>
@@ -77,6 +86,7 @@ function FlightSummaryMenu() {
                                 <FormControlLabel onChange={handleTextSelected} value="sms" control={<Radio />} label="Text" />
                             </RadioGroup>
                         </FormControl>
+                        {/* Multiple receipts form radio display */}
                         <FormControl>
                             <FormLabel id="receipt-type">Would you like a second receipt?</FormLabel>
                             <RadioGroup
@@ -89,7 +99,8 @@ function FlightSummaryMenu() {
                         </FormControl>
                     </Paper>
                 </Grid>
-
+                {/* Conditional rendering on textSelected state */}
+                {/* renders either text or sms based off radio selection */}
                 {textSelected ? (
                     <Grid item style={{ paddingLeft: "75px", width: 300 }} xs={2}>
                         <Paper style={{ padding: "10px" }}>
@@ -111,6 +122,7 @@ function FlightSummaryMenu() {
                             />
                         </Paper>
                     </Grid>)}
+                {/* Bill display for total and orders submitted in a condensed fashion*/}
                 <Grid item xs={1} style={{ paddingLeft: "200px", paddingBottom: "10px", width: 500 }}>
                     <h2>Orders Below</h2>
                     <Paper style={{ display: "flex", maxHeight: '400px', overflow: 'auto' }}>

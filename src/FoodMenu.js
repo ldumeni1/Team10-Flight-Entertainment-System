@@ -164,15 +164,15 @@ function FoodMenu(props) {
                             <MenuItem style={fontStyles} onClick={addToOrder}>Peanuts: 0.50$</MenuItem>
                             <MenuItem style={fontStyles} onClick={addToOrder}>Pretzels: 1.00$</MenuItem>
                             <MenuItem style={fontStyles} onClick={addToOrder}>Fruit Bowl: 2.50$</MenuItem>
-                            <MenuItem style={fontStyles} onClick={addToOrder}>Sandwich: 5:00$</MenuItem>
-                            <MenuItem style={fontStyles} onClick={addToOrder}>Soup: 3:50$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Sandwich: 5.00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Soup: 3.50$</MenuItem>
                         </MenuList>}
                     {drinkDisplay &&
                         <MenuList>
                             <MenuItem style={fontStyles} onClick={addToOrder}>Water: 0.00$</MenuItem>
                             <MenuItem style={fontStyles} onClick={addToOrder}>Soda: 2.00$</MenuItem>
-                            <MenuItem style={fontStyles} onClick={addToOrder}>Alcohol: 6:00$</MenuItem>
-                            <MenuItem style={fontStyles} onClick={addToOrder}>Sparkling Water: 1:00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Alcohol: 6.00$</MenuItem>
+                            <MenuItem style={fontStyles} onClick={addToOrder}>Sparkling Water: 1.00$</MenuItem>
                         </MenuList>}
                 </Box>
             </Grid>

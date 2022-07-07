@@ -245,7 +245,7 @@ function FoodMenu(props) {
                     </Box>
                 </Grid>
                 <Box>
-                    <Typography style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
+                    <Typography paddingTop="7px" style={fontStyles}>Order Total: <span id="total">0.00</span>$</Typography>
                 </Box>
                 {/* confirm button to fire cascading events */}
                 <Grid>

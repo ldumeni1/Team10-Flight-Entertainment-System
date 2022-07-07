@@ -233,12 +233,12 @@ function FoodMenu(props) {
                 {/* conditional cart render */}
                 <Grid item style={{ flexGrow: "1" }}>
                     <h2 text-align="center">Cart Items</h2>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', width: 300, border: 2, borderColor: 'primary.main' }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: 375, border: 2, borderColor: 'primary.main' }}>
                         {orderSelection.length != 0 ?
                             <ul>
                                 {orderSelection.map((item) => (
-                                    <li key={item.price}>{item.name} {item.amount}
-                                        <span><button onClick={() => removeFromOrder(item.name, item.price, item.amount)}> remove </button></span>
+                                    <li style={{ fontSize: "1.5em", paddingRight: "10px" }} key={item.price}>{item.name} {item.amount} &nbsp;
+                                        <span><button id="remove-button" onClick={() => removeFromOrder(item.name, item.price, item.amount)}> remove </button></span>
                                     </li>
                                 ))}
                             </ul> : <p>Cart is Empty</p>}
@@ -249,7 +249,7 @@ function FoodMenu(props) {
                 </Box>
                 {/* confirm button to fire cascading events */}
                 <Grid>
-                    <button onClick={handleOrderConfirm}> Confirm Order </button>
+                    <button id='confirm-button' class="btn" onClick={handleOrderConfirm}> Confirm Order </button>
                 </Grid>
             </Grid>
         </Grid>

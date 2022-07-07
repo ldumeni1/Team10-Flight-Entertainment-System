@@ -42,7 +42,8 @@ function FoodMenu(props) {
         setFoodDisplay(false)
     }
 
-    //add to order functiuon upon order confirmation button
+    //add to order functiuon upon add to order
+    //this triggers EVERY TIME an item is added to cart
     const addToOrder = (event) => { //argument current event
         var arr = event.currentTarget.innerText.split(": ");
         var name = arr[0];
@@ -73,7 +74,7 @@ function FoodMenu(props) {
         }
     }
 
-    //remove function from current 
+    //remove function from current cart
     const removeFromOrder = (name, price, amount) => {
         var total = document.getElementById("total").innerHTML;
         document.getElementById("total").innerHTML = parseFloat(total) - parseFloat(price);
@@ -100,6 +101,7 @@ function FoodMenu(props) {
     const allItems = ["Peanuts", "Pretzels", "Fruit Bowl", "Sandwich", "Soup", "Water", "Soda", "Alcohol", "Sparkling Water"]
 
     //on button for order submit
+    //adds to local storage
     const handleOrderConfirm = () => {
         const localStorageOrders = JSON.parse(localStorage.getItem('orders'))
         //container for local storage + current order
@@ -237,7 +239,7 @@ function FoodMenu(props) {
                         {orderSelection.length != 0 ?
                             <ul>
                                 {orderSelection.map((item) => (
-                                    <li style={{ fontSize: "1.5em", paddingRight: "10px" }} key={item.price}>{item.name} {item.amount} &nbsp;
+                                    <li style={{ fontSize: "1.5em", paddingRight: "10px" }} key={item.price}>{item.name} x{item.amount} &nbsp;
                                         <span><button id="remove-button" onClick={() => removeFromOrder(item.name, item.price, item.amount)}> remove </button></span>
                                     </li>
                                 ))}
